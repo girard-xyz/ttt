@@ -4,10 +4,10 @@ import 'package:ttt/core/colors.dart';
 import 'package:ttt/domain/entities/game.dart';
 import 'package:ttt/domain/entities/game_status.dart';
 import 'package:ttt/domain/entities/player.dart';
-import 'package:ttt/l10n/app_localizations.dart';
-import 'package:ttt/presentation/game/game_bloc.dart';
-import 'package:ttt/presentation/game/game_event.dart';
-import 'package:ttt/presentation/game/game_state.dart';
+import 'package:ttt/core/l10n/app_localizations.dart';
+import 'package:ttt/presentation/game/bloc/game_bloc.dart';
+import 'package:ttt/presentation/game/bloc/game_event.dart';
+import 'package:ttt/presentation/game/bloc/game_state.dart';
 import 'package:ttt/presentation/widgets/board_grid.dart';
 import 'package:ttt/presentation/widgets/game_bottom_sheet.dart';
 

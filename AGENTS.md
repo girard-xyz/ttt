@@ -14,7 +14,7 @@ Clean Architecture with 3 layers:
 
 ```
 lib/
-  core/         # shared constants, extensions, error/failure wrappers
+  core/         # shared constants, l10n, extensions, error/failure wrappers
   domain/       # entities, repository interfaces, use cases, AI logic
   data/         # repository impls, DTOs (Freezed), data sources
   presentation/ # screens, widgets, BLoC/Cubit (Freezed states/events)

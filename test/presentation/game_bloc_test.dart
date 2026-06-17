@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ttt/domain/entities/cell_value.dart';
 import 'package:ttt/domain/entities/game_mode.dart';
 import 'package:ttt/domain/entities/game_status.dart';
-import 'package:ttt/presentation/game/game_bloc.dart';
-import 'package:ttt/presentation/game/game_event.dart';
-import 'package:ttt/presentation/game/game_state.dart';
+import 'package:ttt/presentation/game/bloc/game_bloc.dart';
+import 'package:ttt/presentation/game/bloc/game_event.dart';
+import 'package:ttt/presentation/game/bloc/game_state.dart';
 
 void main() {
   group('GameBloc', () {

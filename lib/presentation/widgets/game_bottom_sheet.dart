@@ -4,7 +4,7 @@ import 'package:ttt/domain/entities/game.dart';
 import 'package:ttt/domain/entities/game_mode.dart';
 import 'package:ttt/domain/entities/game_status.dart';
 import 'package:ttt/domain/entities/player.dart';
-import 'package:ttt/l10n/app_localizations.dart';
+import 'package:ttt/core/l10n/app_localizations.dart';
 
 class GameBottomSheet extends StatelessWidget {
   final Game? finishedGame;

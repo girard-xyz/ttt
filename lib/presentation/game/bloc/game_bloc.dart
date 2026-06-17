@@ -6,8 +6,8 @@ import 'package:ttt/domain/entities/game_status.dart';
 import 'package:ttt/domain/entities/player.dart';
 import 'package:ttt/domain/repositories/game_repository.dart';
 import 'package:ttt/domain/usecases/get_computer_move.dart';
-import 'package:ttt/presentation/game/game_event.dart';
-import 'package:ttt/presentation/game/game_state.dart';
+import 'package:ttt/presentation/game/bloc/game_event.dart';
+import 'package:ttt/presentation/game/bloc/game_state.dart';
 
 class GameBloc extends Bloc<GameEvent, GameState> {
   final GameRepository _repository;

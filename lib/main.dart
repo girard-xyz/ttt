@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ttt/l10n/app_localizations.dart';
-import 'package:ttt/presentation/game/game_bloc.dart';
+import 'package:ttt/core/l10n/app_localizations.dart';
+import 'package:ttt/presentation/game/bloc/game_bloc.dart';
 import 'package:ttt/presentation/game/game_page.dart';
 
 void main() {
