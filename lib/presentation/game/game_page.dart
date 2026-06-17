@@ -99,13 +99,17 @@ class _GamePageState extends State<GamePage> {
             }
           },
           builder: (context, state) {
+            final l10n = AppLocalizations.of(context)!;
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _buildStatus(state),
+                    Semantics(
+                      liveRegion: true,
+                      child: _buildStatus(state),
+                    ),
                     const SizedBox(height: 16),
                     Flexible(
                       child: BoardGrid(
@@ -121,10 +125,13 @@ class _GamePageState extends State<GamePage> {
                     AnimatedOpacity(
                       opacity: state.isLoading ? 1.0 : 0.0,
                       duration: const Duration(milliseconds: 200),
-                      child: const SizedBox(
+                      child: SizedBox(
                         height: 36,
                         child: Center(
-                          child: CircularProgressIndicator(color: Colors.white),
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            semanticsLabel: l10n.loadingLabel,
+                          ),
                         ),
                       ),
                     ),

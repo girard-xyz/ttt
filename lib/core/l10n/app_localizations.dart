@@ -125,26 +125,20 @@ abstract class AppLocalizations {
   /// Button to start a local multiplayer game
   ///
   /// In en, this message translates to:
-  /// **'vs Friend'**
-  String get vsFriend;
+  /// **'Local Game'**
+  String get localGame;
 
   /// Button to start a game against the computer
   ///
   /// In en, this message translates to:
-  /// **'vs Computer'**
-  String get vsComputer;
+  /// **'Against Computer'**
+  String get againstComputer;
 
-  /// Button to start a default game
+  /// Title shown on the bottom sheet initial state
   ///
   /// In en, this message translates to:
-  /// **'Start Game'**
-  String get startGame;
-
-  /// Button to play another round
-  ///
-  /// In en, this message translates to:
-  /// **'Play Again'**
-  String get playAgain;
+  /// **'Start a game!'**
+  String get startGameTitle;
 
   /// Result text when a player wins (bottom sheet)
   ///
@@ -158,17 +152,89 @@ abstract class AppLocalizations {
   /// **'It\'s a Draw!'**
   String get resultDraw;
 
-  /// Button to play as X
+  /// Accessibility label for top-left board cell
   ///
   /// In en, this message translates to:
-  /// **'Play as X'**
-  String get playAsX;
+  /// **'Top left'**
+  String get cellPos0;
 
-  /// Button to play as O
+  /// Accessibility label for top-center board cell
   ///
   /// In en, this message translates to:
-  /// **'Play as O'**
-  String get playAsO;
+  /// **'Top center'**
+  String get cellPos1;
+
+  /// Accessibility label for top-right board cell
+  ///
+  /// In en, this message translates to:
+  /// **'Top right'**
+  String get cellPos2;
+
+  /// Accessibility label for center-left board cell
+  ///
+  /// In en, this message translates to:
+  /// **'Center left'**
+  String get cellPos3;
+
+  /// Accessibility label for center board cell
+  ///
+  /// In en, this message translates to:
+  /// **'Center'**
+  String get cellPos4;
+
+  /// Accessibility label for center-right board cell
+  ///
+  /// In en, this message translates to:
+  /// **'Center right'**
+  String get cellPos5;
+
+  /// Accessibility label for bottom-left board cell
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom left'**
+  String get cellPos6;
+
+  /// Accessibility label for bottom-center board cell
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom center'**
+  String get cellPos7;
+
+  /// Accessibility label for bottom-right board cell
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom right'**
+  String get cellPos8;
+
+  /// Accessibility label for an empty board cell value
+  ///
+  /// In en, this message translates to:
+  /// **'Empty'**
+  String get cellEmpty;
+
+  /// Accessibility label for cell containing X
+  ///
+  /// In en, this message translates to:
+  /// **'X'**
+  String get cellX;
+
+  /// Accessibility label for cell containing O
+  ///
+  /// In en, this message translates to:
+  /// **'O'**
+  String get cellO;
+
+  /// Accessibility label for the entire game board
+  ///
+  /// In en, this message translates to:
+  /// **'Tic-tac-toe board'**
+  String get boardLabel;
+
+  /// Accessibility label shown while the AI is computing its move
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking...'**
+  String get loadingLabel;
 }
 
 class _AppLocalizationsDelegate

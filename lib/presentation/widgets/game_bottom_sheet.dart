@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ttt/core/colors.dart';
 import 'package:ttt/domain/entities/game.dart';
 import 'package:ttt/domain/entities/game_mode.dart';
@@ -27,6 +28,7 @@ class GameBottomSheet extends StatelessWidget {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      isDismissible: false,
       backgroundColor: Colors.transparent,
       builder: (_) => GameBottomSheet(
         isInitial: isInitial,
@@ -48,44 +50,29 @@ class GameBottomSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (!isInitial) _buildResult(context),
-          const SizedBox(height: 24),
-          _buildModeButton(context, GameMode.local, l10n.vsFriend),
-          const SizedBox(height: 12),
-          _buildModeButton(context, GameMode.vsComputer, l10n.vsComputer),
-          const SizedBox(height: 12),
-          if (isInitial) ...[
-            _buildPlayerChoice(context),
-            const SizedBox(height: 12),
-          ],
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                if (isInitial) {
-                  onStartGame(GameMode.local);
-                } else {
-                  onStartGame(
-                    finishedGame!.gameMode,
-                    humanPlayer: finishedGame!.humanPlayer,
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.grid,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                isInitial ? l10n.startGame : l10n.playAgain,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+          Text(
+            'TTT',
+            style: GoogleFonts.caveatBrush(
+              fontSize: 56,
+              color: Colors.white,
             ),
           ),
+          const SizedBox(height: 8),
+          if (isInitial)
+            Text(
+              l10n.startGameTitle,
+              style: const TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            )
+          else
+            _buildResult(context),
+          const SizedBox(height: 24),
+          _outlinedButton(context, l10n.localGame, GameMode.local),
+          const SizedBox(height: 12),
+          _filledButton(context, l10n.againstComputer, GameMode.vsComputer),
         ],
       ),
     );
@@ -107,7 +94,7 @@ class GameBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildModeButton(BuildContext context, GameMode mode, String label) {
+  Widget _outlinedButton(BuildContext context, String label, GameMode mode) {
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton(
@@ -128,49 +115,30 @@ class GameBottomSheet extends StatelessWidget {
     );
   }
 
-  static String _playerName(Player player) =>
-      player == Player.x ? 'X' : 'O';
-
-  Widget _buildPlayerChoice(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-    return Row(
-      children: [
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              onStartGame(GameMode.vsComputer, humanPlayer: Player.x);
-            },
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white,
-              side: const BorderSide(color: Colors.white),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: Text(l10n.playAsX, style: const TextStyle(fontSize: 16)),
+  Widget _filledButton(BuildContext context, String label, GameMode mode) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+          onStartGame(mode);
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.grid,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: OutlinedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              onStartGame(GameMode.vsComputer, humanPlayer: Player.o);
-            },
-            style: OutlinedButton.styleFrom(
-              foregroundColor: Colors.white,
-              side: const BorderSide(color: Colors.white),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: Text(l10n.playAsO, style: const TextStyle(fontSize: 16)),
-          ),
+        child: Text(
+          label,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-      ],
+      ),
     );
   }
+
+  static String _playerName(Player player) =>
+      player == Player.x ? 'X' : 'O';
 }

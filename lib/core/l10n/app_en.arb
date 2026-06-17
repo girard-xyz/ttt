@@ -28,21 +28,17 @@
       }
     }
   },
-  "vsFriend": "vs Friend",
-  "@vsFriend": {
+  "localGame": "Local Game",
+  "@localGame": {
     "description": "Button to start a local multiplayer game"
   },
-  "vsComputer": "vs Computer",
-  "@vsComputer": {
+  "againstComputer": "Against Computer",
+  "@againstComputer": {
     "description": "Button to start a game against the computer"
   },
-  "startGame": "Start Game",
-  "@startGame": {
-    "description": "Button to start a default game"
-  },
-  "playAgain": "Play Again",
-  "@playAgain": {
-    "description": "Button to play another round"
+  "startGameTitle": "Start a game!",
+  "@startGameTitle": {
+    "description": "Title shown on the bottom sheet initial state"
   },
   "resultWinner": "{player} Wins!",
   "@resultWinner": {
@@ -58,12 +54,60 @@
   "@resultDraw": {
     "description": "Result text when game is a draw (bottom sheet)"
   },
-  "playAsX": "Play as X",
-  "@playAsX": {
-    "description": "Button to play as X"
+  "cellPos0": "Top left",
+  "@cellPos0": {
+    "description": "Accessibility label for top-left board cell"
   },
-  "playAsO": "Play as O",
-  "@playAsO": {
-    "description": "Button to play as O"
+  "cellPos1": "Top center",
+  "@cellPos1": {
+    "description": "Accessibility label for top-center board cell"
+  },
+  "cellPos2": "Top right",
+  "@cellPos2": {
+    "description": "Accessibility label for top-right board cell"
+  },
+  "cellPos3": "Center left",
+  "@cellPos3": {
+    "description": "Accessibility label for center-left board cell"
+  },
+  "cellPos4": "Center",
+  "@cellPos4": {
+    "description": "Accessibility label for center board cell"
+  },
+  "cellPos5": "Center right",
+  "@cellPos5": {
+    "description": "Accessibility label for center-right board cell"
+  },
+  "cellPos6": "Bottom left",
+  "@cellPos6": {
+    "description": "Accessibility label for bottom-left board cell"
+  },
+  "cellPos7": "Bottom center",
+  "@cellPos7": {
+    "description": "Accessibility label for bottom-center board cell"
+  },
+  "cellPos8": "Bottom right",
+  "@cellPos8": {
+    "description": "Accessibility label for bottom-right board cell"
+  },
+  "cellEmpty": "Empty",
+  "@cellEmpty": {
+    "description": "Accessibility label for an empty board cell value"
+  },
+  "cellX": "X",
+  "@cellX": {
+    "description": "Accessibility label for cell containing X"
+  },
+  "cellO": "O",
+  "@cellO": {
+    "description": "Accessibility label for cell containing O"
+  },
+  "boardLabel": "Tic-tac-toe board",
+  "@boardLabel": {
+    "description": "Accessibility label for the entire game board"
+  },
+  "loadingLabel": "Thinking...",
+  "@loadingLabel": {
+    "description": "Accessibility label shown while the AI is computing its move"
   }
 }

@@ -25,16 +25,13 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get vsFriend => 'vs Friend';
+  String get localGame => 'Local Game';
 
   @override
-  String get vsComputer => 'vs Computer';
+  String get againstComputer => 'Against Computer';
 
   @override
-  String get startGame => 'Start Game';
-
-  @override
-  String get playAgain => 'Play Again';
+  String get startGameTitle => 'Start a game!';
 
   @override
   String resultWinner(String player) {
@@ -45,8 +42,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resultDraw => 'It\'s a Draw!';
 
   @override
-  String get playAsX => 'Play as X';
+  String get cellPos0 => 'Top left';
 
   @override
-  String get playAsO => 'Play as O';
+  String get cellPos1 => 'Top center';
+
+  @override
+  String get cellPos2 => 'Top right';
+
+  @override
+  String get cellPos3 => 'Center left';
+
+  @override
+  String get cellPos4 => 'Center';
+
+  @override
+  String get cellPos5 => 'Center right';
+
+  @override
+  String get cellPos6 => 'Bottom left';
+
+  @override
+  String get cellPos7 => 'Bottom center';
+
+  @override
+  String get cellPos8 => 'Bottom right';
+
+  @override
+  String get cellEmpty => 'Empty';
+
+  @override
+  String get cellX => 'X';
+
+  @override
+  String get cellO => 'O';
+
+  @override
+  String get boardLabel => 'Tic-tac-toe board';
+
+  @override
+  String get loadingLabel => 'Thinking...';
 }

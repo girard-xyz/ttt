@@ -25,16 +25,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get vsFriend => 'vs Ami';
+  String get localGame => 'Partie locale';
 
   @override
-  String get vsComputer => 'vs Ordinateur';
+  String get againstComputer => 'Contre l\'ordinateur';
 
   @override
-  String get startGame => 'Commencer';
-
-  @override
-  String get playAgain => 'Rejouer';
+  String get startGameTitle => 'Commencer une partie !';
 
   @override
   String resultWinner(String player) {
@@ -45,8 +42,44 @@ class AppLocalizationsFr extends AppLocalizations {
   String get resultDraw => 'Match nul !';
 
   @override
-  String get playAsX => 'Jouer en X';
+  String get cellPos0 => 'En haut à gauche';
 
   @override
-  String get playAsO => 'Jouer en O';
+  String get cellPos1 => 'En haut au centre';
+
+  @override
+  String get cellPos2 => 'En haut à droite';
+
+  @override
+  String get cellPos3 => 'Au centre à gauche';
+
+  @override
+  String get cellPos4 => 'Au centre';
+
+  @override
+  String get cellPos5 => 'Au centre à droite';
+
+  @override
+  String get cellPos6 => 'En bas à gauche';
+
+  @override
+  String get cellPos7 => 'En bas au centre';
+
+  @override
+  String get cellPos8 => 'En bas à droite';
+
+  @override
+  String get cellEmpty => 'Vide';
+
+  @override
+  String get cellX => 'X';
+
+  @override
+  String get cellO => 'O';
+
+  @override
+  String get boardLabel => 'Plateau de tic-tac-toe';
+
+  @override
+  String get loadingLabel => 'Réflexion...';
 }

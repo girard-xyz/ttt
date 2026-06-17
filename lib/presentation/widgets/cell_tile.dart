@@ -8,6 +8,7 @@ class CellTile extends StatelessWidget {
   final bool isLastMove;
   final bool isWinningCell;
   final VoidCallback onTap;
+  final String semanticsLabel;
 
   const CellTile({
     super.key,
@@ -15,33 +16,38 @@ class CellTile extends StatelessWidget {
     required this.isLastMove,
     required this.isWinningCell,
     required this.onTap,
+    required this.semanticsLabel,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: value == CellValue.empty ? onTap : null,
-      child: AnimatedScale(
-        scale: 1.0,
-        duration: const Duration(milliseconds: 200),
-        child: AnimatedOpacity(
-          opacity: 1.0,
+    return Semantics(
+      label: semanticsLabel,
+      button: value == CellValue.empty,
+      child: GestureDetector(
+        onTap: value == CellValue.empty ? onTap : null,
+        child: AnimatedScale(
+          scale: 1.0,
           duration: const Duration(milliseconds: 200),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            decoration: BoxDecoration(
-              color: AppColors.grid,
-              borderRadius: BorderRadius.circular(12),
-              border: isWinningCell
-                  ? Border.all(color: Colors.white, width: 3)
-                  : null,
-            ),
-            child: Center(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                child: value == CellValue.empty
-                    ? const SizedBox.shrink(key: ValueKey('empty'))
-                    : _buildSymbol(value.player!),
+          child: AnimatedOpacity(
+            opacity: 1.0,
+            duration: const Duration(milliseconds: 200),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              decoration: BoxDecoration(
+                color: AppColors.grid,
+                borderRadius: BorderRadius.circular(12),
+                border: isWinningCell
+                    ? Border.all(color: Colors.white, width: 6)
+                    : null,
+              ),
+              child: Center(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: value == CellValue.empty
+                      ? const SizedBox.shrink(key: ValueKey('empty'))
+                      : _buildSymbol(value.player!),
+                ),
               ),
             ),
           ),
@@ -61,10 +67,12 @@ class CellTile extends StatelessWidget {
             key: const ValueKey('o'),
             painter: _OPainter(color: AppColors.oColor),
           );
-    return FractionallySizedBox(
-      widthFactor: 2 / 3,
-      heightFactor: 2 / 3,
-      child: child,
+    return ExcludeSemantics(
+      child: FractionallySizedBox(
+        widthFactor: 2 / 3,
+        heightFactor: 2 / 3,
+        child: child,
+      ),
     );
   }
 }
@@ -77,8 +85,8 @@ class _XPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = color
-      ..strokeWidth = 6
-      ..strokeCap = StrokeCap.round;
+      ..strokeWidth = 12
+      ..strokeCap = StrokeCap.butt;
     final inset = size.width * 0.2;
     canvas.drawLine(
       Offset(inset, inset),
@@ -104,7 +112,7 @@ class _OPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = color
-      ..strokeWidth = 6
+      ..strokeWidth = 12
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
     final rect = Rect.fromLTWH(
