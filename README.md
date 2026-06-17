@@ -8,78 +8,21 @@
 
 A cross-platform Tic-Tac-Toe game built with **Flutter** using **Clean Architecture**. Play locally or against an AI opponent powered by the minimax algorithm.
 
+[**Play Online**](https://girard-xyz.github.io/ttt/) — live web version deployed via GitHub Pages.
+
 ## Features
 
-- 🎮 **Local & AI Modes** — Play against another player or challenge the AI
-- 🤖 **Intelligent Opponent** — Minimax algorithm with strategic play
-- 💾 **Auto-Save** — Game sessions persist automatically via bitpacked encoding
-- 🎨 **Smooth Animations** — Modern UI with fade/scale transitions and win-line drawing
-- 🌍 **Internationalization** — Multi-language support (l10n)
-- 📱 **Multi-Platform** — iOS, Android, and Web in one codebase
+- **Local & AI Modes** — Play against another player or challenge the AI
+- **Intelligent Opponent** — Minimax algorithm with strategic play
+- **Auto-Save** — Game sessions persist automatically via bitpacked encoding
+- **Smooth Animations** — Modern UI with fade/scale transitions and win-line drawing
+- **Internationalization** — Multi-language support (l10n)
+- **Multi-Platform** — iOS, Android, and Web in one codebase
 
 ## Quick Start
 
-### Prerequisites
-
-- **FVM** (Flutter Version Manager): [Install FVM](https://fvm.app)
-- **Dart SDK**: 3.8.1+
-
-### Setup
-
-```bash
-# Install dependencies
-fvm flutter pub get
-
-# Generate code (Freezed, l10n, JSON serialization)
-fvm flutter pub run build_runner build --delete-conflicting-outputs
-fvm flutter gen-l10n
-```
-
-### Run
-
-```bash
-# iOS
-fvm flutter run -d ios
-
-# Android
-fvm flutter run -d android
-
-# Web
-fvm flutter run -d web
-```
-
-## Development
-
-### Code Generation
-
-After modifying **Freezed classes** or **ARB files**:
-
-```bash
-# Freezed, JSON serializable
-fvm flutter pub run build_runner build --delete-conflicting-outputs
-
-# Localization strings
-fvm flutter gen-l10n
-```
-
-### Testing
-
-```bash
-# Run all tests
-fvm flutter test
-
-# Run specific test file
-fvm flutter test test/domain/use_cases/game_logic_test.dart
-
-# Code analysis
-fvm flutter analyze
-
-# Format code
-fvm flutter format .
-```
-
 ### Project Structure
-
+ 
 ```
 lib/
   core/         # Shared constants, l10n, extensions, error handling
@@ -105,9 +48,3 @@ For deep dives, see:
 - [AGENTS.md — Bitpacking](./AGENTS.md#bitpacking)
 - [AGENTS.md — Conventions](./AGENTS.md#conventions)
 
-## Learn More
-
-- [Flutter Documentation](https://flutter.dev/docs)
-- [BLoC Pattern](https://bloclibrary.dev)
-- [Freezed Code Generation](https://pub.dev/packages/freezed)
-- [Clean Architecture in Flutter](https://medium.com/flutter-community/clean-architecture-in-flutter)
