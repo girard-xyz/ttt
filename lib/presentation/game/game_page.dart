@@ -27,7 +27,9 @@ class _GamePageState extends State<GamePage> {
   @override
   void initState() {
     super.initState();
-    context.read<GameBloc>().add(const LoadGame());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<GameBloc>().add(const LoadGame());
+    });
   }
 
   void _showStartSheet() {
