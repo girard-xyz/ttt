@@ -100,7 +100,6 @@ class _GamePageState extends State<GamePage> {
             }
           },
           builder: (context, state) {
-            final l10n = AppLocalizations.of(context)!;
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(24),
