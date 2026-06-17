@@ -9,5 +9,4 @@ class GameEvent with _$GameEvent {
   const factory GameEvent.cellTapped(int index) = CellTapped;
   const factory GameEvent.newGame(GameMode mode, {@Default(Player.x) Player humanPlayer}) = NewGame;
   const factory GameEvent.loadGame() = LoadGame;
-  const factory GameEvent.playAgain() = PlayAgain;
 }

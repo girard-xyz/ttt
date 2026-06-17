@@ -55,14 +55,13 @@ extension GameEventPatterns on GameEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CellTapped value)?  cellTapped,TResult Function( NewGame value)?  newGame,TResult Function( LoadGame value)?  loadGame,TResult Function( PlayAgain value)?  playAgain,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( CellTapped value)?  cellTapped,TResult Function( NewGame value)?  newGame,TResult Function( LoadGame value)?  loadGame,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case CellTapped() when cellTapped != null:
 return cellTapped(_that);case NewGame() when newGame != null:
 return newGame(_that);case LoadGame() when loadGame != null:
-return loadGame(_that);case PlayAgain() when playAgain != null:
-return playAgain(_that);case _:
+return loadGame(_that);case _:
   return orElse();
 
 }
@@ -80,14 +79,13 @@ return playAgain(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CellTapped value)  cellTapped,required TResult Function( NewGame value)  newGame,required TResult Function( LoadGame value)  loadGame,required TResult Function( PlayAgain value)  playAgain,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( CellTapped value)  cellTapped,required TResult Function( NewGame value)  newGame,required TResult Function( LoadGame value)  loadGame,}){
 final _that = this;
 switch (_that) {
 case CellTapped():
 return cellTapped(_that);case NewGame():
 return newGame(_that);case LoadGame():
-return loadGame(_that);case PlayAgain():
-return playAgain(_that);case _:
+return loadGame(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +102,13 @@ return playAgain(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CellTapped value)?  cellTapped,TResult? Function( NewGame value)?  newGame,TResult? Function( LoadGame value)?  loadGame,TResult? Function( PlayAgain value)?  playAgain,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( CellTapped value)?  cellTapped,TResult? Function( NewGame value)?  newGame,TResult? Function( LoadGame value)?  loadGame,}){
 final _that = this;
 switch (_that) {
 case CellTapped() when cellTapped != null:
 return cellTapped(_that);case NewGame() when newGame != null:
 return newGame(_that);case LoadGame() when loadGame != null:
-return loadGame(_that);case PlayAgain() when playAgain != null:
-return playAgain(_that);case _:
+return loadGame(_that);case _:
   return null;
 
 }
@@ -128,13 +125,12 @@ return playAgain(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int index)?  cellTapped,TResult Function( GameMode mode,  Player humanPlayer)?  newGame,TResult Function()?  loadGame,TResult Function()?  playAgain,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int index)?  cellTapped,TResult Function( GameMode mode,  Player humanPlayer)?  newGame,TResult Function()?  loadGame,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case CellTapped() when cellTapped != null:
 return cellTapped(_that.index);case NewGame() when newGame != null:
 return newGame(_that.mode,_that.humanPlayer);case LoadGame() when loadGame != null:
-return loadGame();case PlayAgain() when playAgain != null:
-return playAgain();case _:
+return loadGame();case _:
   return orElse();
 
 }
@@ -152,13 +148,12 @@ return playAgain();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int index)  cellTapped,required TResult Function( GameMode mode,  Player humanPlayer)  newGame,required TResult Function()  loadGame,required TResult Function()  playAgain,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int index)  cellTapped,required TResult Function( GameMode mode,  Player humanPlayer)  newGame,required TResult Function()  loadGame,}) {final _that = this;
 switch (_that) {
 case CellTapped():
 return cellTapped(_that.index);case NewGame():
 return newGame(_that.mode,_that.humanPlayer);case LoadGame():
-return loadGame();case PlayAgain():
-return playAgain();case _:
+return loadGame();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +170,12 @@ return playAgain();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int index)?  cellTapped,TResult? Function( GameMode mode,  Player humanPlayer)?  newGame,TResult? Function()?  loadGame,TResult? Function()?  playAgain,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int index)?  cellTapped,TResult? Function( GameMode mode,  Player humanPlayer)?  newGame,TResult? Function()?  loadGame,}) {final _that = this;
 switch (_that) {
 case CellTapped() when cellTapped != null:
 return cellTapped(_that.index);case NewGame() when newGame != null:
 return newGame(_that.mode,_that.humanPlayer);case LoadGame() when loadGame != null:
-return loadGame();case PlayAgain() when playAgain != null:
-return playAgain();case _:
+return loadGame();case _:
   return null;
 
 }
@@ -347,38 +341,6 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'GameEvent.loadGame()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class PlayAgain implements GameEvent {
-  const PlayAgain();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlayAgain);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'GameEvent.playAgain()';
 }
 
 

@@ -22,7 +22,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     on<CellTapped>(_onCellTapped);
     on<NewGame>(_onNewGame);
     on<LoadGame>(_onLoadGame);
-    on<PlayAgain>(_onPlayAgain);
   }
 
   Future<void> _onCellTapped(CellTapped event, Emitter<GameState> emit) async {
@@ -32,63 +31,69 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     final newGame = game.makeMove(event.index);
     if (newGame == game) return;
 
-    final winLine = newGame.winningLine;
     emit(state.copyWith(
       game: newGame,
       lastMoveIndex: event.index,
-      winLine: winLine,
+      winLine: newGame.winningLine,
     ));
 
-    await _repository.save(newGame);
+    await _persistGame(newGame);
 
     if (!newGame.status.isGameOver &&
         newGame.gameMode == GameMode.vsComputer &&
         newGame.currentPlayer != newGame.humanPlayer) {
-      emit(state.copyWith(isLoading: true));
-      await Future.delayed(const Duration(milliseconds: 400));
-
-      final isMaximizing = newGame.currentPlayer == Player.x;
-      final aiMove =
-          _getComputerMove.execute(newGame.board, isMaximizing: isMaximizing);
-
-      final gameAfterAi = newGame.makeMove(aiMove);
-      final aiWinLine = gameAfterAi.winningLine;
-      emit(state.copyWith(
-        game: gameAfterAi,
-        isLoading: false,
-        lastMoveIndex: aiMove,
-        winLine: aiWinLine,
-      ));
-      await _repository.save(gameAfterAi);
+      await _makeAiMove(newGame, emit);
     }
   }
 
-  void _onNewGame(NewGame event, Emitter<GameState> emit) async {
+  Future<void> _onNewGame(NewGame event, Emitter<GameState> emit) async {
     final game = Game.initial(event.mode, humanPlayer: event.humanPlayer);
     emit(GameState.initial(event.mode, humanPlayer: event.humanPlayer));
     await _repository.clear();
 
     if (event.mode == GameMode.vsComputer && game.currentPlayer != game.humanPlayer) {
-      emit(state.copyWith(isLoading: true));
-      await Future.delayed(const Duration(milliseconds: 400));
-      final aiMove = _getComputerMove.execute(game.board, isMaximizing: true);
-      final gameAfterAi = game.makeMove(aiMove);
-      emit(state.copyWith(game: gameAfterAi, isLoading: false, lastMoveIndex: aiMove));
-      await _repository.save(gameAfterAi);
+      await _makeAiMove(game, emit, isMaximizing: true);
     }
   }
 
   Future<void> _onLoadGame(LoadGame event, Emitter<GameState> emit) async {
     final saved = await _repository.load();
     if (saved != null) {
-      final winLine = saved.winningLine;
-      emit(state.copyWith(game: saved, winLine: winLine));
+      emit(state.copyWith(
+        game: saved,
+        winLine: saved.winningLine,
+        isLoaded: true,
+      ));
+    } else {
+      emit(state.copyWith(isLoaded: true));
     }
   }
 
-  void _onPlayAgain(PlayAgain event, Emitter<GameState> emit) {
-    final mode = state.game.gameMode;
-    final humanPlayer = state.game.humanPlayer;
-    add(NewGame(mode, humanPlayer: humanPlayer));
+  Future<void> _persistGame(Game game) async {
+    if (game.status.isGameOver) {
+      await _repository.clear();
+    } else {
+      await _repository.save(game);
+    }
+  }
+
+  Future<void> _makeAiMove(
+    Game game,
+    Emitter<GameState> emit, {
+    bool? isMaximizing,
+  }) async {
+    emit(state.copyWith(isLoading: true));
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    final maximizing = isMaximizing ?? game.currentPlayer == Player.x;
+    final aiMove = _getComputerMove.execute(game.board, isMaximizing: maximizing);
+    final gameAfterAi = game.makeMove(aiMove);
+    emit(state.copyWith(
+      game: gameAfterAi,
+      isLoading: false,
+      lastMoveIndex: aiMove,
+      winLine: gameAfterAi.winningLine,
+    ));
+    await _persistGame(gameAfterAi);
   }
 }

@@ -14,8 +14,6 @@ import 'package:ttt/presentation/game/bloc/game_state.dart';
 import 'package:ttt/presentation/widgets/board_grid.dart';
 import 'package:ttt/presentation/widgets/game_bottom_sheet.dart';
 
-String _playerName(Player player) => player == Player.x ? 'X' : 'O';
-
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
 
@@ -30,17 +28,6 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     super.initState();
     context.read<GameBloc>().add(const LoadGame());
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_sheetShown) {
-      _sheetShown = true;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showStartSheet();
-      });
-    }
   }
 
   void _showStartSheet() {
@@ -73,6 +60,22 @@ class _GamePageState extends State<GamePage> {
       body: SafeArea(
         child: BlocConsumer<GameBloc, GameState>(
           listener: (context, state) {
+            if (state.isLoaded && !_sheetShown) {
+              _sheetShown = true;
+              if (state.game.status.isGameOver) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (mounted) _showGameOverSheet(state.game);
+                });
+              } else if (state.game.emptyIndices.length < 9) {
+                // Saved mid-game loaded — continue playing
+              } else {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _showStartSheet();
+                });
+              }
+              return;
+            }
+
             if (state.game.status.isGameOver) {
               if (state.winLine != null) {
                 Confetti.launch(
@@ -156,10 +159,10 @@ class _GamePageState extends State<GamePage> {
     final game = state.game;
     final l10n = AppLocalizations.of(context)!;
     final text = game.status.winner != null
-        ? l10n.winnerText(_playerName(game.status.winner!))
+        ? l10n.winnerText(game.status.winner!.displayName)
         : game.status == GameStatus.draw
         ? l10n.draw
-        : l10n.playerTurn(_playerName(game.currentPlayer));
+        : l10n.playerTurn(game.currentPlayer.displayName);
     return Text(
       text,
       style: const TextStyle(

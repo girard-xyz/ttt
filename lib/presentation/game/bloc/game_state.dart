@@ -6,12 +6,14 @@ import 'package:ttt/domain/entities/player.dart';
 class GameState extends Equatable {
   final Game game;
   final bool isLoading;
+  final bool isLoaded;
   final int? lastMoveIndex;
   final List<int>? winLine;
 
   const GameState({
     required this.game,
     required this.isLoading,
+    this.isLoaded = false,
     this.lastMoveIndex,
     this.winLine,
   });
@@ -26,17 +28,19 @@ class GameState extends Equatable {
   GameState copyWith({
     Game? game,
     bool? isLoading,
+    bool? isLoaded,
     int? lastMoveIndex,
     List<int>? winLine,
   }) {
     return GameState(
       game: game ?? this.game,
       isLoading: isLoading ?? this.isLoading,
-      lastMoveIndex: lastMoveIndex,
-      winLine: winLine,
+      isLoaded: isLoaded ?? this.isLoaded,
+      lastMoveIndex: lastMoveIndex ?? this.lastMoveIndex,
+      winLine: winLine ?? this.winLine,
     );
   }
 
   @override
-  List<Object?> get props => [game, isLoading, lastMoveIndex, winLine];
+  List<Object?> get props => [game, isLoading, isLoaded, lastMoveIndex, winLine];
 }
