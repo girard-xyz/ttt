@@ -1,12 +1,13 @@
 import 'package:ttt/domain/entities/cell_value.dart';
 import 'package:ttt/domain/entities/game.dart';
+import 'package:ttt/domain/entities/game_status.dart';
 
 class GetComputerMove {
   const GetComputerMove();
 
   int execute(List<CellValue> board, {bool isMaximizing = true}) {
     int bestScore = isMaximizing ? -1000 : 1000;
-    int bestMove = _emptyIndices(board).first;
+    int bestMove = Game.emptyIndicesOf(board).first;
 
     for (final index in _orderMoves(board)) {
       final newBoard = List<CellValue>.from(board);
@@ -43,10 +44,10 @@ class GetComputerMove {
     required int alpha,
     required int beta,
   }) {
-    final status = _evaluate(board);
-    if (status == _BoardStatus.xWins) return 10 - depth;
-    if (status == _BoardStatus.oWins) return depth - 10;
-    if (status == _BoardStatus.draw) return 0;
+    final status = Game.evaluateBoard(board);
+    if (status == GameStatus.xWins) return 10 - depth;
+    if (status == GameStatus.oWins) return depth - 10;
+    if (status == GameStatus.draw) return 0;
 
     if (isMaximizing) {
       int maxEval = -1000;
@@ -111,20 +112,3 @@ class GetComputerMove {
     return [...centerEmpty, ...cornerEmpty, ...edgeEmpty, ...otherEmpty];
   }
 }
-
-enum _BoardStatus { playing, xWins, oWins, draw }
-
-_BoardStatus _evaluate(List<CellValue> board) {
-  for (final pattern in Game.winPatterns) {
-    final first = board[pattern[0]];
-    if (first == CellValue.empty) continue;
-    if (board[pattern[1]] == first && board[pattern[2]] == first) {
-      return first == CellValue.x ? _BoardStatus.xWins : _BoardStatus.oWins;
-    }
-  }
-  if (board.every((c) => c.isOccupied)) return _BoardStatus.draw;
-  return _BoardStatus.playing;
-}
-
-List<int> _emptyIndices(List<CellValue> board) =>
-    [for (int i = 0; i < board.length; i++) if (board[i] == CellValue.empty) i];

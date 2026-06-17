@@ -105,9 +105,5 @@
   "boardLabel": "Tic-tac-toe board",
   "@boardLabel": {
     "description": "Accessibility label for the entire game board"
-  },
-  "loadingLabel": "Thinking...",
-  "@loadingLabel": {
-    "description": "Accessibility label shown while the AI is computing its move"
   }
 }

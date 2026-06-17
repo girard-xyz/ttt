@@ -83,7 +83,7 @@ class GameBottomSheet extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final status = finishedGame!.status;
     final message = status.winner != null
-        ? l10n.resultWinner(_playerName(status.winner!))
+        ? l10n.resultWinner(status.winner!.displayName)
         : l10n.resultDraw;
     return Text(
       message,
@@ -139,6 +139,4 @@ class GameBottomSheet extends StatelessWidget {
       ),
     );
   }
-
-  static String _playerName(Player player) => player == Player.x ? 'X' : 'O';
 }

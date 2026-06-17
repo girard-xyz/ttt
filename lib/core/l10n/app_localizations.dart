@@ -229,12 +229,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Tic-tac-toe board'**
   String get boardLabel;
-
-  /// Accessibility label shown while the AI is computing its move
-  ///
-  /// In en, this message translates to:
-  /// **'Thinking...'**
-  String get loadingLabel;
 }
 
 class _AppLocalizationsDelegate

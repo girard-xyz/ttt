@@ -120,27 +120,6 @@ void main() {
     });
   });
 
-  group('isBoardFull', () {
-    test('returns false for empty board', () {
-      final game = Game.initial(GameMode.local);
-      check(game.isBoardFull).isFalse();
-    });
-
-    test('returns true for full board', () {
-      var game = Game.initial(GameMode.local);
-      game = game.makeMove(0);
-      game = game.makeMove(3);
-      game = game.makeMove(1);
-      game = game.makeMove(4);
-      game = game.makeMove(6);
-      game = game.makeMove(2);
-      game = game.makeMove(5);
-      game = game.makeMove(8);
-      game = game.makeMove(7);
-      check(game.isBoardFull).isTrue();
-    });
-  });
-
   group('copyWith', () {
     test('creates modified copy', () {
       final game = Game.initial(GameMode.local);

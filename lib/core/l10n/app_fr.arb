@@ -21,6 +21,5 @@
   "cellEmpty": "Vide",
   "cellX": "X",
   "cellO": "O",
-  "boardLabel": "Plateau de tic-tac-toe",
-  "loadingLabel": "Réflexion..."
+  "boardLabel": "Plateau de tic-tac-toe"
 }

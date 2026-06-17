@@ -79,7 +79,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get boardLabel => 'Tic-tac-toe board';
-
-  @override
-  String get loadingLabel => 'Thinking...';
 }
