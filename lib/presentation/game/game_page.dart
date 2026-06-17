@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:ttt/core/colors.dart';
 import 'package:ttt/domain/entities/game.dart';
 import 'package:ttt/domain/entities/game_status.dart';
@@ -72,6 +73,21 @@ class _GamePageState extends State<GamePage> {
         child: BlocConsumer<GameBloc, GameState>(
           listener: (context, state) {
             if (state.game.status.isGameOver) {
+              if (state.winLine != null) {
+                Confetti.launch(
+                  context,
+                  options: ConfettiOptions(
+                    particleCount: 80,
+                    spread: 60,
+                    colors: [
+                      AppColors.oColor,
+                      AppColors.grid,
+                      AppColors.xColor,
+                      Colors.white,
+                    ],
+                  ),
+                );
+              }
               Future.delayed(
                 state.winLine != null
                     ? const Duration(seconds: 1)
@@ -101,11 +117,17 @@ class _GamePageState extends State<GamePage> {
                         },
                       ),
                     ),
-                    if (state.isLoading)
-                      const Padding(
-                        padding: EdgeInsets.only(top: 24),
-                        child: CircularProgressIndicator(color: Colors.white),
+                    const SizedBox(height: 24),
+                    AnimatedOpacity(
+                      opacity: state.isLoading ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 200),
+                      child: const SizedBox(
+                        height: 36,
+                        child: Center(
+                          child: CircularProgressIndicator(color: Colors.white),
+                        ),
                       ),
+                    ),
                   ],
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ttt/core/l10n/app_localizations.dart';
+import 'package:ttt/core/theme.dart';
 import 'package:ttt/presentation/game/bloc/game_bloc.dart';
 import 'package:ttt/presentation/game/game_page.dart';
 
@@ -19,7 +20,7 @@ class TttApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
+      theme: AppTheme.dark,
       home: BlocProvider(
         create: (_) => GameBloc(),
         child: const GamePage(),

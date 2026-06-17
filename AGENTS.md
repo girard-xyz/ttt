@@ -6,6 +6,7 @@
 - **App package**: `xyz.girard.ttt`
 - **Platforms**: iOS, Android, Web
 - **Code generation** after modifying Freezed classes: `fvm flutter pub run build_runner build --delete-conflicting-outputs`
+- **l10n generation** after modifying ARB files: `fvm flutter gen-l10n` (config in `l10n.yaml`)
 - **Single test**: `fvm flutter test test/path/to/file_test.dart`
 
 ## Architecture

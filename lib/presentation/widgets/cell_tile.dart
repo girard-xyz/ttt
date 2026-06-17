@@ -27,10 +27,14 @@ class CellTile extends StatelessWidget {
         child: AnimatedOpacity(
           opacity: 1.0,
           duration: const Duration(milliseconds: 200),
-          child: Container(
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
             decoration: BoxDecoration(
               color: AppColors.grid,
               borderRadius: BorderRadius.circular(12),
+              border: isWinningCell
+                  ? Border.all(color: Colors.white, width: 3)
+                  : null,
             ),
             child: Center(
               child: AnimatedSwitcher(
@@ -48,17 +52,19 @@ class CellTile extends StatelessWidget {
 
   Widget _buildSymbol(Player player) {
     final isX = player == Player.x;
-    if (isX) {
-      return CustomPaint(
-        key: const ValueKey('x'),
-        size: const Size.square(48),
-        painter: _XPainter(color: AppColors.xColor),
-      );
-    }
-    return CustomPaint(
-      key: const ValueKey('o'),
-      size: const Size.square(48),
-      painter: _OPainter(color: AppColors.oColor),
+    final child = isX
+        ? CustomPaint(
+            key: const ValueKey('x'),
+            painter: _XPainter(color: AppColors.xColor),
+          )
+        : CustomPaint(
+            key: const ValueKey('o'),
+            painter: _OPainter(color: AppColors.oColor),
+          );
+    return FractionallySizedBox(
+      widthFactor: 2 / 3,
+      heightFactor: 2 / 3,
+      child: child,
     );
   }
 }
