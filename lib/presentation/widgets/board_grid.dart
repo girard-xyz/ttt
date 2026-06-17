@@ -24,9 +24,7 @@ class BoardGrid extends StatelessWidget {
     return Semantics(
       container: true,
       label: l10n.boardLabel,
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: GridView.builder(
+      child: GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -52,7 +50,6 @@ class BoardGrid extends StatelessWidget {
             );
           },
         ),
-      ),
     );
   }
 

@@ -26,29 +26,21 @@ class CellTile extends StatelessWidget {
       button: value == CellValue.empty,
       child: GestureDetector(
         onTap: value == CellValue.empty ? onTap : null,
-        child: AnimatedScale(
-          scale: 1.0,
-          duration: const Duration(milliseconds: 200),
-          child: AnimatedOpacity(
-            opacity: 1.0,
-            duration: const Duration(milliseconds: 200),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              decoration: BoxDecoration(
-                color: AppColors.grid,
-                borderRadius: BorderRadius.circular(12),
-                border: isWinningCell
-                    ? Border.all(color: Colors.white, width: 6)
-                    : null,
-              ),
-              child: Center(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 200),
-                  child: value == CellValue.empty
-                      ? const SizedBox.shrink(key: ValueKey('empty'))
-                      : _buildSymbol(value.player!),
-                ),
-              ),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          decoration: BoxDecoration(
+            color: AppColors.grid,
+            borderRadius: BorderRadius.circular(12),
+            border: isWinningCell
+                ? Border.all(color: Colors.white, width: 6)
+                : null,
+          ),
+          child: Center(
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: value == CellValue.empty
+                  ? const SizedBox.shrink(key: ValueKey('empty'))
+                  : _buildSymbol(value.player!),
             ),
           ),
         ),

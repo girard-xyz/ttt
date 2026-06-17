@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_confetti/flutter_confetti.dart';
@@ -12,8 +14,7 @@ import 'package:ttt/presentation/game/bloc/game_state.dart';
 import 'package:ttt/presentation/widgets/board_grid.dart';
 import 'package:ttt/presentation/widgets/game_bottom_sheet.dart';
 
-String _playerName(Player player) =>
-    player == Player.x ? 'X' : 'O';
+String _playerName(Player player) => player == Player.x ? 'X' : 'O';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -103,39 +104,46 @@ class _GamePageState extends State<GamePage> {
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Semantics(
-                      liveRegion: true,
-                      child: _buildStatus(state),
-                    ),
-                    const SizedBox(height: 16),
-                    Flexible(
-                      child: BoardGrid(
-                        game: state.game,
-                        lastMoveIndex: state.lastMoveIndex,
-                        winLine: state.winLine,
-                        onCellTapped: (index) {
-                          context.read<GameBloc>().add(CellTapped(index));
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    AnimatedOpacity(
-                      opacity: state.isLoading ? 1.0 : 0.0,
-                      duration: const Duration(milliseconds: 200),
-                      child: SizedBox(
-                        height: 36,
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            semanticsLabel: l10n.loadingLabel,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final spinnerHeight = state.isLoading ? 36.0 : 0.0;
+                    const nonBoardHeight = 36.0 + 16 + 24;
+                    final boardSize = min(
+                      constraints.maxWidth,
+                      constraints.maxHeight - nonBoardHeight - spinnerHeight,
+                    ).clamp(300.0, 640.0);
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Semantics(liveRegion: true, child: _buildStatus(state)),
+                        SizedBox(height: 24),
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 100),
+                          foregroundDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            border: state.isLoading
+                                ? Border.all(
+                                    color: AppColors.background.withAlpha(128),
+                                    width: 6,
+                                  )
+                                : null,
+                          ),
+                          child: SizedBox(
+                            width: boardSize,
+                            height: boardSize,
+                            child: BoardGrid(
+                              game: state.game,
+                              lastMoveIndex: state.lastMoveIndex,
+                              winLine: state.winLine,
+                              onCellTapped: (index) {
+                                context.read<GameBloc>().add(CellTapped(index));
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  },
                 ),
               ),
             );
@@ -151,8 +159,8 @@ class _GamePageState extends State<GamePage> {
     final text = game.status.winner != null
         ? l10n.winnerText(_playerName(game.status.winner!))
         : game.status == GameStatus.draw
-            ? l10n.draw
-            : l10n.playerTurn(_playerName(game.currentPlayer));
+        ? l10n.draw
+        : l10n.playerTurn(_playerName(game.currentPlayer));
     return Text(
       text,
       style: const TextStyle(

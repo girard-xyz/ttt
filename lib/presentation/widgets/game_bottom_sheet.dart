@@ -29,6 +29,7 @@ class GameBottomSheet extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       isDismissible: false,
+      enableDrag: false,
       backgroundColor: Colors.transparent,
       builder: (_) => GameBottomSheet(
         isInitial: isInitial,
@@ -50,11 +51,11 @@ class GameBottomSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            'TTT',
-            style: GoogleFonts.caveatBrush(
-              fontSize: 56,
-              color: Colors.white,
+          Semantics(
+            label: 'Tic-Tac-Toe',
+            child: Text(
+              'TTT',
+              style: GoogleFonts.caveatBrush(fontSize: 56, color: Colors.white),
             ),
           ),
           const SizedBox(height: 8),
@@ -139,6 +140,5 @@ class GameBottomSheet extends StatelessWidget {
     );
   }
 
-  static String _playerName(Player player) =>
-      player == Player.x ? 'X' : 'O';
+  static String _playerName(Player player) => player == Player.x ? 'X' : 'O';
 }
