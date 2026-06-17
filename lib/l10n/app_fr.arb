@@ -1,0 +1,15 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Tic-Tac-Toe",
+  "winnerText": "{player} gagne !",
+  "draw": "Match nul !",
+  "playerTurn": "Tour de {player}",
+  "vsFriend": "vs Ami",
+  "vsComputer": "vs Ordinateur",
+  "startGame": "Commencer",
+  "playAgain": "Rejouer",
+  "resultWinner": "{player} gagne !",
+  "resultDraw": "Match nul !",
+  "playAsX": "Jouer en X",
+  "playAsO": "Jouer en O"
+}

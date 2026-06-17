@@ -4,6 +4,7 @@ import 'package:ttt/domain/entities/game.dart';
 import 'package:ttt/domain/entities/game_mode.dart';
 import 'package:ttt/domain/entities/game_status.dart';
 import 'package:ttt/domain/entities/player.dart';
+import 'package:ttt/l10n/app_localizations.dart';
 
 class GameBottomSheet extends StatelessWidget {
   final Game? finishedGame;
@@ -37,6 +38,7 @@ class GameBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: const BoxDecoration(
@@ -46,11 +48,11 @@ class GameBottomSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (!isInitial) _buildResult(),
+          if (!isInitial) _buildResult(context),
           const SizedBox(height: 24),
-          _buildModeButton(context, GameMode.local, 'vs Friend'),
+          _buildModeButton(context, GameMode.local, l10n.vsFriend),
           const SizedBox(height: 12),
-          _buildModeButton(context, GameMode.vsComputer, 'vs Computer'),
+          _buildModeButton(context, GameMode.vsComputer, l10n.vsComputer),
           const SizedBox(height: 12),
           if (isInitial) ...[
             _buildPlayerChoice(context),
@@ -79,7 +81,7 @@ class GameBottomSheet extends StatelessWidget {
                 ),
               ),
               child: Text(
-                isInitial ? 'Start Game' : 'Play Again',
+                isInitial ? l10n.startGame : l10n.playAgain,
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -89,14 +91,12 @@ class GameBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildResult() {
+  Widget _buildResult(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final status = finishedGame!.status;
-    String message;
-    if (status.winner != null) {
-      message = status.winner == Player.x ? 'X Wins!' : 'O Wins!';
-    } else {
-      message = "It's a Draw!";
-    }
+    final message = status.winner != null
+        ? l10n.resultWinner(_playerName(status.winner!))
+        : l10n.resultDraw;
     return Text(
       message,
       style: const TextStyle(
@@ -111,7 +111,10 @@ class GameBottomSheet extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton(
-        onPressed: () => onStartGame(mode),
+        onPressed: () {
+          Navigator.of(context).pop();
+          onStartGame(mode);
+        },
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.white,
           side: const BorderSide(color: Colors.white),
@@ -125,13 +128,19 @@ class GameBottomSheet extends StatelessWidget {
     );
   }
 
+  static String _playerName(Player player) =>
+      player == Player.x ? 'X' : 'O';
+
   Widget _buildPlayerChoice(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Row(
       children: [
         Expanded(
           child: OutlinedButton(
-            onPressed: () =>
-                onStartGame(GameMode.vsComputer, humanPlayer: Player.x),
+            onPressed: () {
+              Navigator.of(context).pop();
+              onStartGame(GameMode.vsComputer, humanPlayer: Player.x);
+            },
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white,
               side: const BorderSide(color: Colors.white),
@@ -140,14 +149,16 @@ class GameBottomSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text('Play as X', style: TextStyle(fontSize: 16)),
+            child: Text(l10n.playAsX, style: const TextStyle(fontSize: 16)),
           ),
         ),
         const SizedBox(width: 12),
         Expanded(
           child: OutlinedButton(
-            onPressed: () =>
-                onStartGame(GameMode.vsComputer, humanPlayer: Player.o),
+            onPressed: () {
+              Navigator.of(context).pop();
+              onStartGame(GameMode.vsComputer, humanPlayer: Player.o);
+            },
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white,
               side: const BorderSide(color: Colors.white),
@@ -156,7 +167,7 @@ class GameBottomSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text('Play as O', style: TextStyle(fontSize: 16)),
+            child: Text(l10n.playAsO, style: const TextStyle(fontSize: 16)),
           ),
         ),
       ],

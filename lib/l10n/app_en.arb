@@ -1,0 +1,69 @@
+{
+  "@@locale": "en",
+  "appTitle": "Tic-Tac-Toe",
+  "@appTitle": {
+    "description": "The application title"
+  },
+  "winnerText": "{player} wins!",
+  "@winnerText": {
+    "description": "Status text when a player wins",
+    "placeholders": {
+      "player": {
+        "type": "String",
+        "example": "X"
+      }
+    }
+  },
+  "draw": "Draw!",
+  "@draw": {
+    "description": "Status text when game is a draw"
+  },
+  "playerTurn": "{player}'s turn",
+  "@playerTurn": {
+    "description": "Status text indicating whose turn it is",
+    "placeholders": {
+      "player": {
+        "type": "String",
+        "example": "X"
+      }
+    }
+  },
+  "vsFriend": "vs Friend",
+  "@vsFriend": {
+    "description": "Button to start a local multiplayer game"
+  },
+  "vsComputer": "vs Computer",
+  "@vsComputer": {
+    "description": "Button to start a game against the computer"
+  },
+  "startGame": "Start Game",
+  "@startGame": {
+    "description": "Button to start a default game"
+  },
+  "playAgain": "Play Again",
+  "@playAgain": {
+    "description": "Button to play another round"
+  },
+  "resultWinner": "{player} Wins!",
+  "@resultWinner": {
+    "description": "Result text when a player wins (bottom sheet)",
+    "placeholders": {
+      "player": {
+        "type": "String",
+        "example": "X"
+      }
+    }
+  },
+  "resultDraw": "It's a Draw!",
+  "@resultDraw": {
+    "description": "Result text when game is a draw (bottom sheet)"
+  },
+  "playAsX": "Play as X",
+  "@playAsX": {
+    "description": "Button to play as X"
+  },
+  "playAsO": "Play as O",
+  "@playAsO": {
+    "description": "Button to play as O"
+  }
+}
